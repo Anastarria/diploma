@@ -1,0 +1,34 @@
+version: '3'
+services:
+  db:
+    image: mysql:5.7
+    container_name: read_mysql
+    environment:
+      MYSQL_DATABASE: lara
+      MYSQL_USER: root
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - "3303:3306"
+  php:
+    image: webdevops/php:7.4
+    container_name: read_php
+    environment:
+      PHP_UPLOAD_MAX_FILESIZE: 5000M
+      PHP_POST_MAX_SIZE: 5000M
+    volumes:
+      - "./:/laravel"
+    working_dir: '/laravel'
+  nginx:
+    depends_on:
+      - php
+    image: webdevops/nginx
+    container_name: read_nginx
+    environment:
+      WEB_DOCUMENT_ROOT: /laravel/public
+      WEB_DOCUMENT_INDEX: index.php
+      WEB_PHP_SOCKET: php:9000
+    volumes:
+      - "./:/laravel"
+    ports:
+      - "9000:80"
+
