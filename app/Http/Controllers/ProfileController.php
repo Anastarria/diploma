@@ -4,6 +4,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\EditProfileRequest;
+use App\Models\Book;
+use App\Models\Bookmark;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -21,8 +23,24 @@ class ProfileController
            die();
        }
 
+       $bookmarks = Bookmark::query()
+           ->where('user_id', '=', $user->id)
+           ->get('book_id')
+           ->toArray();
+
+
+       $books = Bookmark::with(['book'])
+           ->with(['user'])
+           ->where('user_id', '=', $user->id)
+           ->get()
+           ->toArray();
+
+//       print_r($books);
+//       die();
+
        return view('User.profile', [
-           'user' => $user
+           'user' => $user,
+           'books' => $books
        ]);
 
     }

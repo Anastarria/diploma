@@ -16,8 +16,8 @@
 </head>
 <body>
 @section('navbar')
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
+<nav class="navbar read-nav navbar-default">
+    <div class="container-fluid read-nav">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <a class="navbar-brand" href="/">Take Some Time To Read</a>
@@ -51,24 +51,14 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><input class="form-control mr-sm-2 nav-link" type="search" placeholder="Search" aria-label="Search"></li>
-                <li><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button></li>
+                <li><input class="form-control" type="search" placeholder="Search" aria-label="Search"></li>
+                <li><a href="/">Поиск</a></li>
             </ul>
 
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1 justify-content-center">
-    <ul class="nav navbar-nav justify-content-center">
-        <li><a href="/">Main</a></li>
-        <li><a href="/">Catalogue</a></li>
-        <li><a href="/">Genres</a></li>
-    </ul>
 
-</div>
-<div class="container">
-
-</div>
 @endsection
 @yield('navbar')
 @yield('content')

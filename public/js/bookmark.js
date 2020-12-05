@@ -2,7 +2,7 @@ function addBookmark()
 {
     document.getElementById('removeBookmark').style.display = 'block';
     document.getElementById('addBookmark').style.display = 'none';
-    
+
     let book_id = window.document.getElementById('book_id').value;
     let user_id = window.document.getElementById('user_id').value;
 

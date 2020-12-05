@@ -22,7 +22,6 @@ class CreateBooksTable extends Migration
             $table->string('path_to_book')->nullable();
             $table->string('cover')->nullable();
             $table->text('description');
-            $table->smallInteger('is_admin')->default(0);
             $table->timestamps();
         });
     }

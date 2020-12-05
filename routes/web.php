@@ -32,6 +32,7 @@ Route::get('profile/edit', 'App\Http\Controllers\ProfileController@editProfilePa
 Route::post('profile/edit', 'App\Http\Controllers\ProfileController@updateProfile');
 
 Route::get('books/info/{id}', 'App\Http\Controllers\BookController@showSingleBook');
+Route::get('books/read', 'App\Http\Controllers\BookController@readBook');
 Route::get('books/create', 'App\Http\Controllers\BookController@createBookPage');
 Route::post('books/create', 'App\Http\Controllers\BookController@createBook');
 Route::get('books/edit', 'App\Http\Controllers\BookController@updateBookPage');

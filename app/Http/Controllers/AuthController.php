@@ -29,7 +29,7 @@ class AuthController
         $validated = $request->validated();
         $unauthorized = User::query()
             ->where('email', $validated['email'])
-            ->where('verified', 0)
+            ->where('email_verified', 0)
             ->first();
 
         if ($unauthorized) {

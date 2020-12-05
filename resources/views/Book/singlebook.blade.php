@@ -27,21 +27,21 @@
                                     <div class="text-right" style="display: block" >
                                         <button type="button" id="submit" name="submit" class="btn btn-primary"><i class="fas fa-book"></i> Читать </button>
                                         @if(!$bookmarks)
-                                        <div id="addBookmark">
+
                                             <input name="book_id" id="book_id" type="hidden" value="{{$book[0]->id}}">
                                             <input name="user_id" id="user_id" type="hidden" value="{{$auth->id}}">
                                             <button  type="submit" id="removeBookmark" name="submit" class="btn btn-warning" onclick="removeBookmark()" style="display: none"><i class="far fa-bookmark"></i> Убрать из закладок</button>
                                             <button  type="submit" id="addBookmark" name="submit" class="btn btn-success" onclick="addBookmark()"><i class="far fa-bookmark"></i> Добавить в закладки</button>
-                                        </div>
+
 
 
                                         @else
-                                        <div >
+
                                             <input name="book_id" id="book_id" type="hidden" value="{{$book[0]->id}}">
                                             <input name="user_id" id="user_id" type="hidden" value="{{$auth->id}}">
                                             <button  type="submit" id="addBookmark" name="submit" class="btn btn-success" onclick="addBookmark()" style="display: none"><i class="far fa-bookmark"></i> Добавить в закладки</button>
                                             <button  type="submit" id="removeBookmark" name="submit" class="btn btn-warning" onclick="removeBookmark()"><i class="far fa-bookmark"></i> Убрать из закладок</button>
-                                        </div>
+
 
                                         @endif
                                     </div>

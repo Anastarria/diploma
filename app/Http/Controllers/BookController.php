@@ -8,6 +8,7 @@ use App\Models\Book;
 use App\Models\Bookmark;
 use App\Models\Comment;
 use App\Models\User;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -81,6 +82,26 @@ class BookController
         $book->save();
 
         return redirect('/');
+    }
+
+    public function readBook():View
+    {
+//        Storage::putFileAs(
+//            'public/books', $request->file('path_to_book'), $path
+//        );
+//        try {
+//            Storage::disk('local')->get('test.txt');
+//        } catch (FileNotFoundException $e) {
+//        }
+
+        $book = file_get_contents(resource_path('../storage/app/public/books/Mahanenko.fb2'));
+
+//        $book = Book::query()
+//            ->where('id', '=', 3)
+//            ->get();
+        return view('Book.readbook', [
+            'book' => $book
+        ]);
     }
 
     public function updateBookPage(): View

@@ -1,6 +1,6 @@
 body{
     /*margin-top:20px;*/
-    color: #1a202c;
+    color: #9eb9f1;
     text-align: left;
     /*background-color: #e2e8f0;*/
 }
@@ -17,7 +17,7 @@ body{
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: #fff;
+    background-color: #37a0bf;
     background-clip: border-box;
     border: 0 solid rgba(0,0,0,.125);
     border-radius: .25rem;
@@ -57,8 +57,8 @@ body{
 
 body{
 
-    color: #6f8ec6;
-    background: #1A233A;
+    color: #4795da;
+    background: #fafafa;
 }
 .account-settings .user-profile {
     margin: 0 0 1rem 0;
@@ -89,7 +89,8 @@ body{
     text-align: center;
 }
 .card {
-    background: #272E48;
+    background: #40556c;
+    color: #f3f3f3;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
@@ -97,13 +98,13 @@ body{
     margin-bottom: 1rem;
 }
 .form-control {
-    border: 1px solid #596280;
+    border: 1px solid #5b7289;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
     font-size: 14px;
-    background: #1A233A;
-    color: #385daa;
+    background: #334453;
+    color: #f3f3f3;
 }
 .book-card {
     padding: 15px;
@@ -111,5 +112,18 @@ body{
 }
 
 .read-nav {
-    background-color: #45818e;
+    background: #334453;
+    color: #fafafa;
+}
+
+.navbar-default .navbar-brand {
+    color: #fafafa;
+}
+
+.navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover {
+    color: #fafafa;
+}
+
+.form-control {
+    margin-top: 7px;
 }

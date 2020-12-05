@@ -21,10 +21,20 @@ use Illuminate\Notifications\Notifiable;
 
  * @property User $user
  */
+
+
 class Bookmark extends Model
 {
     use HasFactory, Notifiable;
 
+    public function book(): HasOne
+    {
+        return $this->hasOne(Book::class, 'id', 'book_id');
+    }
 
+    public function user(): HasOne
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 
 }

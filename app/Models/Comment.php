@@ -27,9 +27,9 @@ class Comment extends Model
 {
     use HasFactory, Notifiable;
 
-    public function user(): hasOne
+    public function user(): BelongsTo
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 
 

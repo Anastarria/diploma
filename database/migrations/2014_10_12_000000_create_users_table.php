@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->integer('email_verified')->default(0);
             $table->string('password');
             $table->string('path_to_avatar')->nullable();
+            $table->smallInteger('is_admin')->default(0);
             $table->timestamps();
         });
     }
