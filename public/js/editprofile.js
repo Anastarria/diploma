@@ -54,8 +54,16 @@ function editProfile()
     http.onreadystatechange = function() {
         if(http.readyState === 4 && http.status === 200) {
             document.getElementById('loader').style.display = 'none';
-            document.getElementById('success').style.display = 'block';
+
             window.location.href = '/profile/edit';
+            const successNotification = window.createNotification({
+                theme: 'success',
+                showDuration: 10000
+            });
+
+            successNotification({
+                message: 'Изменения сохранены'
+            });
         } else if (http.readyState === 4 && http.status > 399) {
             let response = JSON.parse(http.responseText);
             let errorMessage = http.status === 422 ? response.message : response.error;

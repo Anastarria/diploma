@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ asset("css/profile.css") }}">
     <link rel="stylesheet" href="{{asset("css/notifications.css")}}">
     <script src="{{asset("js/notifications.js")}}"></script>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
 </head>
 <body>
@@ -43,7 +43,9 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item btn" href="/profile/info">Profile</a><br>
-                            <a class="dropdown-item btn" href="#">My bookmarks</a><br>
+                            @if($user->is_admin == 1)
+                            <a class="dropdown-item btn" href="/profile/info">Create a new book</a><br>
+                            @endif
                             <a class="dropdown-item btn" href="/logout">Sign Out</a><br>
                         </div>
                 </li>

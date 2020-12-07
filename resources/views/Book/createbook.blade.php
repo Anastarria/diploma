@@ -13,7 +13,7 @@
             <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
                 <div class="card h-100">
                     <div class="card-body">
-                        <form enctype="multipart/form-data" method="post" action="/books/create">
+                        <form enctype="multipart/form-data" method="post">
                         <div class="row gutters">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <h3>Book info</h3>
@@ -51,7 +51,7 @@
                             </div>
                             <div class="form-group col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="text-right">
-                                    <button type="submit" id="submit" name="submit" class="btn btn-primary" >Добавить книгу</button>
+                                    <button type="submit" id="submit" name="submit" class="btn btn-primary" onclick="createBook()">Добавить книгу</button>
                                 </div>
                             </div>
                         </div>

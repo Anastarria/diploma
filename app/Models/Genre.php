@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
-use Spatie\Searchable\SearchResult;
 
 
 /**
@@ -27,23 +26,14 @@ use Spatie\Searchable\SearchResult;
 
  * @property User $user
  */
-class Book extends Model
+class Genre extends Model
 {
     use HasFactory, Notifiable;
 
-    public function user(): BelongsTo
+    public function book(): HasMany
     {
-        return $this->belongsTo(User::class);
+        return $this->hasMany(Book::class);
     }
 
-    public function comment(): HasMany
-    {
-        return $this->hasMany(Comment::class);
-    }
-
-    public function bookmark(): HasMany
-    {
-        return $this->hasMany(Bookmark::class);
-    }
 
 }

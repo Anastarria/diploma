@@ -14,29 +14,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $books = Book::query()
-        ->get()
-        ->toArray();
-    return view('index', [
-        'books' => $books
-    ]);
+Route::get('/', 'App\Http\Controllers\BookController@index');
+Route::post('/books/genre/{genre}', 'App\Http\Controllers\BookController@sortByGenre');
 
-});
 Route::get('/checkemail', function () {
     return view('Auth.checkemail');
 });
 
-Route::get('profile/info', 'App\Http\Controllers\ProfileController@showProfile');
-Route::get('profile/edit', 'App\Http\Controllers\ProfileController@editProfilePage');
-Route::post('profile/edit', 'App\Http\Controllers\ProfileController@updateProfile');
-
 Route::get('books/info/{id}', 'App\Http\Controllers\BookController@showSingleBook');
 Route::get('books/read', 'App\Http\Controllers\BookController@readBook');
-Route::get('books/create', 'App\Http\Controllers\BookController@createBookPage');
-Route::post('books/create', 'App\Http\Controllers\BookController@createBook');
-Route::get('books/edit', 'App\Http\Controllers\BookController@updateBookPage');
-Route::post('books/edit', 'App\Http\Controllers\BookController@updateBook');
+
+Route::middleware(\App\Http\Middleware\isAdmin::class)->group(function (){
+    Route::get('profile/info', 'App\Http\Controllers\ProfileController@showProfile');
+    Route::get('profile/edit', 'App\Http\Controllers\ProfileController@editProfilePage');
+    Route::post('profile/edit', 'App\Http\Controllers\ProfileController@updateProfile');
+
+    Route::get('books/create', 'App\Http\Controllers\BookController@createBookPage');
+    Route::post('books/create', 'App\Http\Controllers\BookController@createBook');
+    Route::get('books/edit/{id}', 'App\Http\Controllers\BookController@updateBookPage');
+    Route::post('books/edit/{id}', 'App\Http\Controllers\BookController@updateBook');
+    Route::post('books/delete/{id}', 'App\Http\Controllers\BookController@deleteBook');
+    Route::post('books/edit/cover/{id}', 'App\Http\Controllers\BookController@changeCover');
+});
 
 Route::post('books/bookmark/add', 'App\Http\Controllers\BookMarksController@addBookmark');
 Route::post('books/bookmark/remove', 'App\Http\Controllers\BookMarksController@removeBookmark');

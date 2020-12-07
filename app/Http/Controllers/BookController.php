@@ -4,41 +4,48 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateBookRequest;
+use App\Http\Requests\EditBookRequest;
 use App\Models\Book;
 use App\Models\Bookmark;
 use App\Models\Comment;
-use App\Models\User;
-use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Response;
 
 class BookController
 {
 
+    public function index()
+    {
+        $books = Book::query()
+            ->get()
+            ->toArray();
+
+
+        return view('index', [
+            'books' => $books
+        ]);
+    }
 
     public function showSingleBook($id, Request $request): View
     {
+
+        $auth = $request->user();
 
         $book = Book::query()
             ->where('id', '=', $id)
             ->get();
 
         $comments = Comment::query()
+            ->where('book', '=', $id)
             ->get()
             ->toArray();
-
-        $auth = $request->user();
 
         $bookmarks = Bookmark::query()
             ->where('book_id', '=', $id)
-            ->where('user_id', '=', $auth->id)
             ->get()
             ->toArray();
-
-//        print_r($bookmarks);
-//        die();
 
         return view('Book.singlebook', [
             'book' => $book,
@@ -58,25 +65,30 @@ class BookController
         $validated = $request->validated();
         $user = $request->user();
 
+//        if (!$validated['cover']) {
+//            return response()
+//                ->json(['error' => "You need to choose the book cover"], Response::HTTP_NOT_ACCEPTABLE);
+//        }
+
         $cover = $request->file('cover')->getClientOriginalName();
         $path = $request->file('path_to_book')->getClientOriginalName();
 
-        Storage::putFileAs(
-            'public/books', $request->file('path_to_book'), $path
-        );
-        Storage::putFileAs(
-            'public/book_covers', $request->file('cover'), $cover
-        );
-
-
         $book = new Book();
+
+        Storage::putFileAs(
+            'public/books', $request->file('path_to_book'), md5($book->id) . '.' . $path
+        );
+        Storage::putFileAs(
+            'public/book_covers', $request->file('cover'), md5($book->id) . '.' . $cover
+        );
+
         $book->title = $validated['title'];
         $book->author = $validated['author'];
         $book->genre = $validated['genre'];
         $book->description = $validated['description'];
         $book->added_by = $user->name;
-        $book->cover = $cover;
-        $book->path_to_book = $path;
+        $book->cover = md5($book->id) . '.' . $cover;
+        $book->path_to_book = md5($book->id) . '.' . $path;
 
 
         $book->save();
@@ -84,38 +96,99 @@ class BookController
         return redirect('/');
     }
 
-    public function readBook():View
+    public function updateBookPage($id): View
     {
-//        Storage::putFileAs(
-//            'public/books', $request->file('path_to_book'), $path
-//        );
-//        try {
-//            Storage::disk('local')->get('test.txt');
-//        } catch (FileNotFoundException $e) {
-//        }
+        $book = Book::query()
+            ->where('id', '=', $id)
+            ->get();
 
-        $book = file_get_contents(resource_path('../storage/app/public/books/Mahanenko.fb2'));
-
-//        $book = Book::query()
-//            ->where('id', '=', 3)
-//            ->get();
-        return view('Book.readbook', [
+        return view('Book.editbook', [
             'book' => $book
         ]);
     }
 
-    public function updateBookPage(): View
+    public function sortByGenre($genre):View
     {
-        return view('Book.editbook');
+        $books = Book::query()
+            ->where('genre', '=', $genre)
+            ->get()
+            ->toArray();
+
+        return view('index', [
+            'books' => $books
+        ]);
     }
 
-    public function updateBook()
+    public function updateBook(EditBookRequest $request, $id)
     {
+        $validated = $request->validated();
+        $user = $request->user();
+
+        $book = Book::query()
+            ->where('id', '=', $id)
+            ->first();
+
+        $book->title = $validated['title'] ?? $book->title;
+        $book->author = $validated['author'] ?? $book->author;
+        $book->genre = $validated['genre'] ?? $book->genre;
+        $book->description = $validated['description'] ?? $book->description;
+        $book->added_by = $user->name ?? $book->added_by;
+
+        $book->save();
+
+        return redirect('/');
     }
 
-    public function deleteBook()
+    public function changeCover($id, EditBookRequest $request)
     {
+        $cover = $request->file('cover')->getClientOriginalName();
+        $book = Book::query()
+            ->where('id', '=', $id)
+            ->first();
+        Storage::putFileAs(
+            'public/book_covers', $request->file('cover'), md5(time()) . '.' . $cover
+        );
+        $book->cover = md5(time()) . '.' . $cover;
+        $book->save();
 
+        return redirect('/books/edit/'.$id);
+    }
+
+    public function changeBookFile($id, EditBookRequest $request)
+    {
+        $cover = $request->file('path_to_book')->getClientOriginalName();
+        $book = Book::query()
+            ->where('id', '=', $id)
+            ->first();
+        Storage::putFileAs(
+            'public/books', $request->file('path_to_book'), md5(time()) . '.' . $cover
+        );
+        $book->path_to_book = md5(time()) . '.' . $cover;
+        $book->save();
+
+        return redirect('/books/edit/'.$id);
+    }
+
+    public function deleteBook($id)
+    {
+        $bookMarks = Bookmark::query()
+            ->where('book_id', '=', $id)
+            ->get();
+        foreach ($bookMarks as $bookMark) {
+            $bookMark->delete();
+        }
+
+        $book = Book::query()
+            ->where('id', '=', $id)
+            ->first();
+
+        if (!$book) {
+            return response()->json(['error' => 'No such book'], Response::HTTP_NOT_FOUND);
+        }
+
+        $book->delete();
+
+        return redirect('/');
     }
 
 

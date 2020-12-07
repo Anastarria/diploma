@@ -18,7 +18,7 @@
 {{--                                {{$book}}--}}
 
 
-                                {{file_get_contents(resource_path('../storage/app/public/books/Mahanenko.fb2'))}}
+                                {{file_get_contents(resource_path('../storage/app/public/books/Mahanenko.txt'))}}
 
                             </div>
 

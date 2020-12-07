@@ -42,14 +42,14 @@ class AuthController
         ]);
 
         $user = User::query()
-            ->where('email', $validated['email'])->first();
-//            ->where('password', $validated['password'])
-//            -> where('verified', 1);
-//
-//        if (!$user || !Hash::check($validated['password'], $user->password)) {
-//            return response()
-//                ->json(['error' => "User not found or password is incorrect"], Response::HTTP_UNAUTHORIZED);
-//        }
+            ->where('email', $validated['email'])
+            -> where('email_verified', 1)
+            ->first();
+
+        if (!$user || !Hash::check($validated['password'], $user->password)) {
+            return response()
+                ->json(['error' => "User not found or password is incorrect"], Response::HTTP_UNAUTHORIZED);
+        }
 
         if ($auth) {
             Auth::login($user);
@@ -78,6 +78,7 @@ class AuthController
             return response()
                 ->json(['error' => "User has been already registered, Please <a href='/login'>Login</a>"], Response::HTTP_UNAUTHORIZED);
         }
+
 
         $user = new User();
         $user->email = $validated['email'];

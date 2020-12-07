@@ -5,96 +5,98 @@
         <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
             <div class="card h-100">
                 <div class="card-body">
-                    <div class="account-settings">
-                        <div class="user-profile">
-                            <div class="user-avatar">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Maxwell Admin">
-                            </div>
-                            <h6>Add author name here</h6>
-                            <h4>Add Book Title Here</h4>
+                    <div class="d-flex flex-column align-items-center text-center">
+                        @if($book[0]->cover)
+                            <img src="{{ asset('storage/book_covers/'.$book[0]->cover) }}" width="150" height="350" alt="Cover">
+                        @else
+                            <img src="{{ asset('storage/book_covers/no-cover.jpg')}}" width="150" height="350" alt=Cover>
+                        @endif
+                        <div class="mt-3">
+                            <h4>Обложка</h4>
+                            <form action="/books/edit/cover/{{$book[0]->id}}" method="post" enctype="multipart/form-data">
+                                <input type="file"  name="cover">
+                                <button class="btn btn-primary"><i class="fa fa-cloud-upload"></i> Обновить обложку</button>
+                            </form>
+                            <form action="/books/delete/{{$book[0]->id}}" method="post" enctype="multipart/form-data">
+                                <button class="btn btn-danger" ><i class="far fa-trash-alt"></i> Удалить книгу</button>
+                            </form>
 
                         </div>
-                        <div class="about">
-                            <h5>Информация о книге</h5>
-                            <ul class="nav navbar-nav" >
-                                <div><a href="/support">Автор:</a></div>
-                                <div><a href="/register">Жанр:</a></div>
-
-                            </ul>
-                            <div class="text-left">
-                                <form action="/editavatar" method="post" enctype="multipart/form-data">
-                                    <input type="file"  name="path_to_avatar">
-                                    <button class="btn btn-success fa fa-cloud-upload" >Обновить аватар</button>
-                                </form>
-                                <form action="/deleteavatar" method="post" enctype="multipart/form-data">
-                                    <button class="btn btn-danger fa fa-trash-alt" >Удалить</button>
-                                </form>
-                            </div>
-
-                        </div>
-
                     </div>
                 </div>
 
             </div>
         </div>
-        <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
-            <div class="card h-100">
-                <div class="card-body">
-                    <div class="row gutters">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <h3>Book info</h3>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <label for="exampleFormControlInput1">Название книги</label><a>  <i class="fas fa-check"></i>   Сохранить изменения</a>
-                            <div style="display: block">Book Name <i class="fas fa-pencil-alt"></i> </div>
-                            <input type="text" class="form-control" id="exampleFormControlInput1">
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <label for="exampleFormControlInput1">Автор</label>
-                            <div style="display: block">Aurhor Name<i class="fas fa-pencil-alt"></i> </div>
-                            <input type="text" class="form-control" id="exampleFormControlInput1">
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <label for="exampleFormControlSelect1">Жанр</label>
-                            <div style="display: block">Genre<i class="fas fa-pencil-alt"></i> </div>
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option>Фентези</option>
-                                <option>Научная Фантастика</option>
-                                <option>Детектив</option>
-                                <option>Роман</option>
-                                <option>Приключения</option>
-                            </select>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <label for="exampleFormControlFile1">Обложка</label>
-                            <div style="display: block">Cover<i class="fas fa-pencil-alt"></i> </div>
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <label for="exampleFormControlFile1">Файл книги (разрешенные форматы:)</label>
-                            <div style="display: block">Book File<i class="fas fa-pencil-alt"></i> </div>
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                        </div>
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <label for="exampleFormControlTextarea1">О книге</label>
-                            <div style="display: block">Short Description<i class="fas fa-pencil-alt"></i> </div>
-                            <textarea class="form-control" placeholder="Краткое описание" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        </div>
+            <div>
+                <div class="col-md-8">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="alert alert-warning" role="alert" id="error" style="display: none">
+                                An error occurred
+                            </div>
+                            <div class="row">
+                                <div id="loader" style="display: none">Processing...</div>
+
+                                <div id="success" class="alert alert-success" role="alert" style="display:none">Changed successfully</div>
 
 
-                    </div>
-                    <div class="row gutters">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div class="text-right">
-                                <button type="button" id="submit" name="submit" class="btn btn-primary">Добавить книгу</button>
 
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Full Name</h6>
+                                </div>
+                                <div id="changeName" style="display: none" class="col-sm-9 text-secondary">
+                                    <input type="text" id="title" placeholder="{{$book[0]->title}}"><br>
+                                    <a onclick="editBook()"><i class="fas fa-check"></i>Сохранить изменения</a>
+                                    <a onclick="hideEditTitle()"><i class="fas fa-times"></i>Отменить</a>
+                                </div>
+                                <div id="showName" style="display: block">{{$book[0]->title}}<a onclick="showEditTitle()"><i class="fas fa-pencil-alt"></i> Редактировать</a> </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Author</h6>
+                            </div>
+                            <div id="changeAuthor" style="display: none"  class="col-sm-9 text-secondary">
+                                <input type="text" id="author" placeholder="{{$book[0]->author}}"><br>
+                                <a onclick="editProfile()">  <i class="fas fa-check"></i> Сохранить изменения</a>
+                                <a onclick="hideEditAuthor()"><i class="fas fa-times"></i>Отменить</a>
+                            </div>
+                            <div id="showAuthor" style="display: block">{{$book[0]->author}}<a onclick="showEditAuthor()"><i class="fas fa-pencil-alt"></i> Редактировать</a> </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Genre</h6>
+                            </div>
+                            <div id="changeGenre" style="display: none" class="col-sm-9 text-secondary">
+                                <input type="password" id="genre" placeholder="{{$book[0]->genre}}"><br>
+                                <a  onclick="editProfile()"><i class="fas fa-check"></i>   Сохранить изменения</a>
+                                <a onclick="hideEditGenre()"><i class="fas fa-times"></i>Отменить</a>
+                            </div>
+                            <div id="showGenre" style="display: block">{{$book[0]->author}}<a onclick="showEditGenre()"><i class="fas fa-pencil-alt"></i> Редактировать</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Description</h6>
+                            </div>
+                            <div id="changeDescription" style="display: none" class="col-sm-9 text-secondary">
+                                <input type="text" id="description"><br>
+                                <a  onclick="editProfile()"><i class="fas fa-check"></i>   Сохранить изменения</a>
+                                <a onclick="hideEditDescription()"><i class="fas fa-times"></i>Отменить</a>
+                            </div>
+                            <div id="showDescription" style="display: block">{{$book[0]->description}}<a onclick="showEditDescription()"><i class="fas fa-pencil-alt"></i>Редактировать</a>
                             </div>
                         </div>
                     </div>
+
                 </div>
+
             </div>
-        </div>
     </div>
     </div>
+    @push('scripts')
+        <script src="{{ asset('js/editbook.js') }}" ></script>
+    @endpush
 @endsection

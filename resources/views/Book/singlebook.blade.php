@@ -15,8 +15,6 @@
                                     @endif
                                 </div>
 
-
-                            </div>
                             <div class="about">
                                 <h3>{{$book[0]->title}}</h3>
                                 <h5 class="mb-2 text-primary">Информация о книге</h5>
@@ -25,30 +23,26 @@
                                         <div>Автор: {{$book[0]->author}}</div>
                                         <div>Жанр:{{$book[0]->genre}}</div>
                                     <div class="text-right" style="display: block" >
+                                        @if($auth->is_admin === 1)
+                                        <a href="/books/edit/{{$book[0]->id}}" type="button" id="submit" name="submit" class="btn btn-warning"><i class="fas fa-book"></i> Редактировать книгу </a>
+                                        @endif
                                         <button type="button" id="submit" name="submit" class="btn btn-primary"><i class="fas fa-book"></i> Читать </button>
                                         @if(!$bookmarks)
-
                                             <input name="book_id" id="book_id" type="hidden" value="{{$book[0]->id}}">
                                             <input name="user_id" id="user_id" type="hidden" value="{{$auth->id}}">
                                             <button  type="submit" id="removeBookmark" name="submit" class="btn btn-warning" onclick="removeBookmark()" style="display: none"><i class="far fa-bookmark"></i> Убрать из закладок</button>
                                             <button  type="submit" id="addBookmark" name="submit" class="btn btn-success" onclick="addBookmark()"><i class="far fa-bookmark"></i> Добавить в закладки</button>
-
-
-
                                         @else
-
                                             <input name="book_id" id="book_id" type="hidden" value="{{$book[0]->id}}">
                                             <input name="user_id" id="user_id" type="hidden" value="{{$auth->id}}">
                                             <button  type="submit" id="addBookmark" name="submit" class="btn btn-success" onclick="addBookmark()" style="display: none"><i class="far fa-bookmark"></i> Добавить в закладки</button>
                                             <button  type="submit" id="removeBookmark" name="submit" class="btn btn-warning" onclick="removeBookmark()"><i class="far fa-bookmark"></i> Убрать из закладок</button>
-
-
                                         @endif
                                     </div>
                                 </ul>
 
                             </div>
-
+                            </div>
                         </div>
                     </div>
 
