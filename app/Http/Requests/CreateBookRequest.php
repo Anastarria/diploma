@@ -27,8 +27,10 @@ class CreateBookRequest extends FormRequest
             'author' => ['string', 'min:6', 'required'],
             'genre' => ['string', 'min:5', 'required'],
             'description' => ['string', 'min:6', 'required'],
-            'cover' => ['required'],
-            'path_to_book' => ['required'],
+            'cover' => ['required', 'mimetypes:image/png,image/jpeg'],
+            'path_to_book' => ['required', 'mimetypes:text/plain,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword'],
+
+
         ];
     }
 }

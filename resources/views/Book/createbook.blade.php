@@ -20,11 +20,11 @@
                             </div>
                             <div class="form-group col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <label for="exampleFormControlInput1">Название книги</label>
-                                <input type="text" class="form-control" name="title" id="title">
+                                <input type="text" class="form-control" name="title" id="title" required>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <label for="exampleFormControlInput1">Автор</label>
-                                <input type="text" class="form-control" name="author" id="author">
+                                <input type="text" class="form-control" name="author" id="author" required>
                             </div>
                             <div class="form-group col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <label for="exampleFormControlSelect1">Жанр</label>
@@ -38,16 +38,16 @@
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <label for="exampleFormControlFile1">Обложка</label>
-                                <input type="file" class="form-control-file" id="cover" name="cover">
+                                <input type="file" accept="image/jpeg,image/png" class="form-control-file" id="cover" name="cover" required>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <label for="exampleFormControlFile1">Файл книги (разрешенные форматы:)</label>
-                                <input type="file" class="form-control-file" id="path_to_book" name="path_to_book">
+                                <input type="file" accept="text/plain,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword" class="form-control-file" id="path_to_book" name="path_to_book" required>
                             </div>
 
                             <div class="form-group col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <label for="exampleFormControlTextarea1">О книге</label>
-                                <textarea class="form-control" placeholder="Краткое описание" name="description" id="description" rows="3"></textarea>
+                                <textarea class="form-control" placeholder="Краткое описание" name="description" id="description" rows="3" required></textarea>
                             </div>
                             <div class="form-group col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="text-right">

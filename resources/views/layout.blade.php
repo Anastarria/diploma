@@ -44,7 +44,7 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item btn" href="/profile/info">Profile</a><br>
                             @if($user->is_admin == 1)
-                            <a class="dropdown-item btn" href="/profile/info">Create a new book</a><br>
+                            <a class="dropdown-item btn" href="/books/create">Create a new book</a><br>
                             @endif
                             <a class="dropdown-item btn" href="/logout">Sign Out</a><br>
                         </div>

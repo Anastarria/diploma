@@ -70,6 +70,7 @@
                                             <input name="book_id" id="book_id" type="hidden" value="{{$book['book']['id']}}">
                                             <input name="user_id" id="user_id" type="hidden" value="{{$user->id}}">
                                             <input type="hidden" class="display: none" id="addBookmark">
+                                            <a href="/books/info/{{$book['book']['id']}}" class="btn btn-success"><i class="far fa-bookmark"></i>К книге</a>
                                             <button  type="submit" id="removeBookmark" name="submit" class="btn btn-warning" onclick="removeBookmark()"><i class="far fa-bookmark"></i> Убрать из закладок</button>
                                         </div>
                                     </div>

@@ -2,32 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2d22dc29-c233-4187-9652-f76043a99967" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Requests/EditBookRequest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Genre.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/reading.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/reading.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/RegisterUserRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/RegisterUserRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Book.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Book.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/profile.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/bookmark.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/bookmark.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/CreateBookRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/CreateBookRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/EditProfileRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/EditProfileRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/notifications.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/notifications.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/createbook.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/createbook.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/editbook.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/editbook.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/editprofile.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/editprofile.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Book/createbook.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Book/createbook.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Book/editbook.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Book/editbook.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Book/readbook.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Book/readbook.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/Book/singlebook.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Book/singlebook.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/User/editProfilePage.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/User/editProfilePage.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/User/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/User/profile.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layout.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -272,6 +260,7 @@
       <workItem from="1607249864514" duration="4750000" />
       <workItem from="1607254852775" duration="22918000" />
       <workItem from="1607356797718" duration="13765000" />
+      <workItem from="1607436594867" duration="19528000" />
     </task>
     <servers />
   </component>

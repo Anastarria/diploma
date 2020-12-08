@@ -16,7 +16,7 @@
                                 <div class="mt-3">
                                     <h4>Настройки аватара</h4>
                                     <form action="/editavatar" method="post" enctype="multipart/form-data">
-                                        <input type="file"  name="path_to_avatar">
+                                        <input type="file" accept="image/jpeg,image/png"  name="path_to_avatar" required>
                                         <button class="btn btn-primary"><i class="fa fa-cloud-upload"></i> Обновить аватар</button>
                                     </form>
                                     <form action="/deleteavatar" method="post" enctype="multipart/form-data">
@@ -48,32 +48,20 @@
                                     </div>
                                     <div id="changeName" style="display: none" class="col-sm-9 text-secondary">
                                         <input type="text" id="name" placeholder="{{$user->name}}"><br>
-                                        <a onclick="editProfile()"><i class="fas fa-check"></i>Сохранить изменения</a>
+                                        <a onclick="editProfileName()"><i class="fas fa-check"></i>Сохранить изменения</a>
                                         <a onclick="hideEditName()"><i class="fas fa-times"></i>Отменить</a>
                                     </div>
                                     <div id="showName" style="display: block">{{$user->name}}<a onclick="showEditName()"><i class="fas fa-pencil-alt"></i> Редактировать</a> </div>
                                     </div>
                                 </div>
                                 <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Email</h6>
-                                    </div>
-                                    <div id="changeEmail" style="display: none"  class="col-sm-9 text-secondary">
-                                        <input type="text" id="email" placeholder="{{$user->email}}"><br>
-                                        <a onclick="editProfile()">  <i class="fas fa-check"></i> Сохранить изменения</a>
-                                        <a onclick="hideEditEmail()"><i class="fas fa-times"></i>Отменить</a>
-                                    </div>
-                                        <div id="showEmail" style="display: block">{{$user->email}}<a onclick="showEditEmail()"><i class="fas fa-pencil-alt"></i> Редактировать</a> </div>
-                                    </div>
-                                <hr>
-                                <div class="row">
+                                  <div class="row">
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Password</h6>
                                     </div>
                                     <div id="changePassword" style="display: none" class="col-sm-9 text-secondary">
                                         <input type="password" id="password"><br>
-                                        <a  onclick="editProfile()"><i class="fas fa-check"></i>   Сохранить изменения</a>
+                                        <a  onclick="editProfilePassword()"><i class="fas fa-check"></i>   Сохранить изменения</a>
                                         <a onclick="hideEditPassword()"><i class="fas fa-times"></i>Отменить</a>
                                     </div>
                                     <div id="showHiddenPassword" style="display: block">******<a onclick="showEditPassword()"><i class="fas fa-pencil-alt"></i> Редактировать</a>

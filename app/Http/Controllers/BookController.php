@@ -33,6 +33,7 @@ class BookController
 
         $auth = $request->user();
 
+
         $book = Book::query()
             ->where('id', '=', $id)
             ->get();
@@ -42,10 +43,17 @@ class BookController
             ->get()
             ->toArray();
 
-        $bookmarks = Bookmark::query()
+        $bookmarks = Bookmark::with(['book'])
+            ->with(['user'])
             ->where('book_id', '=', $id)
             ->get()
             ->toArray();
+
+//        $bookmarks = Bookmark::query()
+//            ->where('book_id', '=', $id)
+//            ->where('user_id', '=', $auth->id)
+//            ->get()
+//            ->toArray();
 
         return view('Book.singlebook', [
             'book' => $book,
@@ -64,11 +72,6 @@ class BookController
     {
         $validated = $request->validated();
         $user = $request->user();
-
-//        if (!$validated['cover']) {
-//            return response()
-//                ->json(['error' => "You need to choose the book cover"], Response::HTTP_NOT_ACCEPTABLE);
-//        }
 
         $cover = $request->file('cover')->getClientOriginalName();
         $path = $request->file('path_to_book')->getClientOriginalName();

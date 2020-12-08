@@ -27,7 +27,7 @@ class EditProfileRequest extends FormRequest
             'password' => ['string', 'min:6', 'required', 'sometimes'],
             'nickname' => ['string', 'min:6', 'required', 'sometimes'],
             'name' => ['string', 'min:6', 'required', 'sometimes'],
-            'path_to_avatar' => ['string', 'required', 'sometimes']
+            'path_to_avatar' => ['string', 'mimetypes:image/png,image/jpeg', 'required', 'sometimes']
         ];
     }
 }

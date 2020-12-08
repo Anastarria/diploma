@@ -23,10 +23,12 @@
                                         <div>Автор: {{$book[0]->author}}</div>
                                         <div>Жанр:{{$book[0]->genre}}</div>
                                     <div class="text-right" style="display: block" >
-                                        @if($auth->is_admin === 1)
+
+                                        @if(\Illuminate\Support\Facades\Auth::check() && $auth->is_admin === 1)
                                         <a href="/books/edit/{{$book[0]->id}}" type="button" id="submit" name="submit" class="btn btn-warning"><i class="fas fa-book"></i> Редактировать книгу </a>
                                         @endif
-                                        <button type="button" id="submit" name="submit" class="btn btn-primary"><i class="fas fa-book"></i> Читать </button>
+                                        <button disabled type="button" id="submit" name="submit" class="btn btn-primary"><i class="fas fa-book"></i> Читать </button>
+                                @if(\Illuminate\Support\Facades\Auth::check())
                                         @if(!$bookmarks)
                                             <input name="book_id" id="book_id" type="hidden" value="{{$book[0]->id}}">
                                             <input name="user_id" id="user_id" type="hidden" value="{{$auth->id}}">
@@ -38,6 +40,7 @@
                                             <button  type="submit" id="addBookmark" name="submit" class="btn btn-success" onclick="addBookmark()" style="display: none"><i class="far fa-bookmark"></i> Добавить в закладки</button>
                                             <button  type="submit" id="removeBookmark" name="submit" class="btn btn-warning" onclick="removeBookmark()"><i class="far fa-bookmark"></i> Убрать из закладок</button>
                                         @endif
+                                @endif
                                     </div>
                                 </ul>
 
@@ -93,10 +96,11 @@
                                         </div>
 
                                     </div>
-                                    @if($comment['added_by'] == $auth->nickname)
+                                    @if(\Illuminate\Support\Facades\Auth::check() && $comment['added_by'] == $auth->nickname)
                                     <form class="text-right" action="/books/comment/delete/{{$comment['id']}}" method="post" enctype="multipart/form-data">
-                                        <button class="btn btn-danger fa fa-trash-alt" >Удалить</button>
+                                        <button class="btn btn-danger far fa-trash-alt" >Удалить</button>
                                     </form>
+
                                     @endif
                                 </div>
                             @endforeach
