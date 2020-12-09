@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Response;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class UserTest extends TestCase
@@ -24,10 +26,17 @@ class UserTest extends TestCase
             ->get('/');
     }
 
-//    public function testExample()
-//    {
-//        $response = $this->get('/');
-//
-//        $response->assertStatus(200);
-//    }
+    public function test_avatars_can_be_uploaded()
+    {
+        Storage::fake('avatars');
+
+        $file = UploadedFile::fake()->image('avatar.jpg');
+
+        $response = $this->post('/editavatar', [
+            'path_to_avatar' => $file,
+        ]);
+
+        Storage::disk('avatars')->assertExists($file->hashName());
+    }
+
 }

@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\Book;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('clear', function () {
+    Log::debug('CLEARED');
+    Artisan::call('cache:clear');
+});
 
 Route::get('/', 'App\Http\Controllers\BookController@index');
 Route::post('/books/genre/{genre}', 'App\Http\Controllers\BookController@sortByGenre');
@@ -35,6 +41,9 @@ Route::middleware(\App\Http\Middleware\isAdmin::class)->group(function (){
     Route::post('books/edit/{id}', 'App\Http\Controllers\BookController@updateBook');
     Route::post('books/delete/{id}', 'App\Http\Controllers\BookController@deleteBook');
     Route::post('books/edit/cover/{id}', 'App\Http\Controllers\BookController@changeCover');
+
+    Route::post('editavatar', 'App\Http\Controllers\UserAvatarController@update');
+    Route::post('deleteavatar', 'App\Http\Controllers\UserAvatarController@delete');
 });
 
 Route::post('books/bookmark/add', 'App\Http\Controllers\BookMarksController@addBookmark');
@@ -49,8 +58,7 @@ Route::post('login', 'App\Http\Controllers\AuthController@login');
 Route::post('register', 'App\Http\Controllers\AuthController@register');
 Route::get('logout', 'App\Http\Controllers\AuthController@logout');
 
-Route::post('editavatar', 'App\Http\Controllers\UserAvatarController@update');
-Route::post('deleteavatar', 'App\Http\Controllers\UserAvatarController@delete');
+
 
 
 Route::get('invite', function (\Illuminate\Http\Request $request) {
