@@ -49,12 +49,6 @@ class BookController
             ->get()
             ->toArray();
 
-//        $bookmarks = Bookmark::query()
-//            ->where('book_id', '=', $id)
-//            ->where('user_id', '=', $auth->id)
-//            ->get()
-//            ->toArray();
-
         return view('Book.singlebook', [
             'book' => $book,
             'comments' => $comments,
@@ -79,10 +73,10 @@ class BookController
         $book = new Book();
 
         Storage::putFileAs(
-            'public/books', $request->file('path_to_book'), md5($book->id) . '.' . $path
+            'public/books', $request->file('path_to_book'), md5(time()) . '.' . $path
         );
         Storage::putFileAs(
-            'public/book_covers', $request->file('cover'), md5($book->id) . '.' . $cover
+            'public/book_covers', $request->file('cover'), md5(time()) . '.' . $cover
         );
 
         $book->title = $validated['title'];
@@ -90,8 +84,8 @@ class BookController
         $book->genre = $validated['genre'];
         $book->description = $validated['description'];
         $book->added_by = $user->name;
-        $book->cover = md5($book->id) . '.' . $cover;
-        $book->path_to_book = md5($book->id) . '.' . $path;
+        $book->cover = md5(time()) . '.' . $cover;
+        $book->path_to_book = md5(time()) . '.' . $path;
 
 
         $book->save();
@@ -174,13 +168,6 @@ class BookController
 
     public function deleteBook($id)
     {
-        $bookMarks = Bookmark::query()
-            ->where('book_id', '=', $id)
-            ->get();
-        foreach ($bookMarks as $bookMark) {
-            $bookMark->delete();
-        }
-
         $book = Book::query()
             ->where('id', '=', $id)
             ->first();
@@ -188,6 +175,19 @@ class BookController
         if (!$book) {
             return response()->json(['error' => 'No such book'], Response::HTTP_NOT_FOUND);
         }
+
+        $bookMarks = Bookmark::query()
+            ->where('book_id', '=', $id)
+            ->get();
+        foreach ($bookMarks as $bookMark) {
+            $bookMark->delete();
+        }
+
+        Storage::delete(
+            'public/books/'.$book->path_to_book);
+        Storage::delete(
+            'public/book_covers/'.$book->cover);
+
 
         $book->delete();
 

@@ -47,7 +47,7 @@
 
                             <div class="form-group col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <label for="exampleFormControlTextarea1">О книге</label>
-                                <textarea class="form-control" placeholder="Краткое описание" name="description" id="description" rows="3" required></textarea>
+                                <textarea class="form-control" name="description" id="description" rows="6"></textarea>
                             </div>
                             <div class="form-group col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="text-right">

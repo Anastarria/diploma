@@ -26,9 +26,9 @@ class EditBookRequest extends FormRequest
             'title' => ['string', 'min:3', 'sometimes'],
             'author' => ['string', 'min:6', 'sometimes'],
             'genre' => ['string', 'min:5', 'sometimes'],
-            'description' => ['string', 'min:6', 'sometimes'],
-            'cover' => ['sometimes'],
-            'path_to_book' => ['sometimes'],
+            'description' => ['string', 'min:50', 'sometimes'],
+            'cover' => ['sometimes', 'mimetypes:image/png,image/jpeg'],
+            'path_to_book' => ['sometimes', 'required', 'mimetypes:text/plain,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword'],
         ];
     }
 }
