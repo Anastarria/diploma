@@ -22,7 +22,7 @@ class UserAvatarController extends Controller
     {
         $name = $request->file('path_to_avatar')->getClientOriginalName();
 
-        $path = Storage::putFileAs(
+        Storage::putFileAs(
             'public/avatars', $request->file('path_to_avatar'), $name
         );
 

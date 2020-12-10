@@ -31,19 +31,21 @@ Route::get('books/info/{id}', 'App\Http\Controllers\BookController@showSingleBoo
 Route::get('books/read', 'App\Http\Controllers\BookController@readBook');
 
 Route::middleware(\App\Http\Middleware\isAdmin::class)->group(function (){
-    Route::get('profile/info', 'App\Http\Controllers\ProfileController@showProfile');
-    Route::get('profile/edit', 'App\Http\Controllers\ProfileController@editProfilePage');
-    Route::post('profile/edit', 'App\Http\Controllers\ProfileController@updateProfile');
-
     Route::get('books/create', 'App\Http\Controllers\BookController@createBookPage');
     Route::post('books/create', 'App\Http\Controllers\BookController@createBook');
     Route::get('books/edit/{id}', 'App\Http\Controllers\BookController@updateBookPage');
     Route::post('books/edit/{id}', 'App\Http\Controllers\BookController@updateBook');
     Route::post('books/delete/{id}', 'App\Http\Controllers\BookController@deleteBook');
     Route::post('books/edit/cover/{id}', 'App\Http\Controllers\BookController@changeCover');
+});
 
+Route::middleware(\App\Http\Middleware\LoggedIn::class)->group(function (){
     Route::post('editavatar', 'App\Http\Controllers\UserAvatarController@update');
     Route::post('deleteavatar', 'App\Http\Controllers\UserAvatarController@delete');
+
+    Route::get('profile/info', 'App\Http\Controllers\ProfileController@showProfile');
+    Route::get('profile/edit', 'App\Http\Controllers\ProfileController@editProfilePage');
+    Route::post('profile/edit', 'App\Http\Controllers\ProfileController@updateProfile');
 });
 
 Route::post('books/bookmark/add', 'App\Http\Controllers\BookMarksController@addBookmark');

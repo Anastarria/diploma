@@ -32,8 +32,8 @@ class UserTest extends TestCase
 
         $file = UploadedFile::fake()->image('avatar.jpg');
 
-        $response = $this->post('/editavatar', [
-            'path_to_avatar' => $file,
+        $response = $this->post('/avatar', [
+            'avatar' => $file,
         ]);
 
         Storage::disk('avatars')->assertExists($file->hashName());
