@@ -3,17 +3,10 @@
     <div class="container">
         <div id="loader" style="display: none">Processing...</div>
 
-        <div id="success" class="alert alert-success" role="alert" style="display:none">Login successful. Redirecting...</div>
-        <div class="alert alert-warning" role="alert" id="error" style="display: none">
-            An error occurred
-        </div>
-
-
-
             <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
                 <div class="card h-100">
                     <div class="card-body">
-                        <form enctype="multipart/form-data" method="post">
+                        <form enctype="multipart/form-data">
                         <div class="row gutters">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <h3>Book info</h3>
@@ -37,11 +30,11 @@
                                 </select>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                <label for="exampleFormControlFile1">Обложка</label>
+                                <label for="exampleFormControlFile1">Обложка (разрешенные форматы: jpeg, png)</label>
                                 <input type="file" accept="image/jpeg,image/png" class="form-control-file" id="cover" name="cover" required>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                <label for="exampleFormControlFile1">Файл книги (разрешенные форматы:)</label>
+                                <label for="exampleFormControlFile1">Файл книги (разрешенные форматы: txt, doc, docx)</label>
                                 <input type="file" accept="text/plain,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword" class="form-control-file" id="path_to_book" name="path_to_book" required>
                             </div>
 
@@ -51,11 +44,12 @@
                             </div>
                             <div class="form-group col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="text-right">
-                                    <button type="submit" id="submit" name="submit" class="btn btn-primary" onclick="createBook()">Добавить книгу</button>
+                                    <button type="button" id="submit" name="submit" class="btn btn-primary" onclick="return createBook()">Добавить книгу</button>
                                 </div>
                             </div>
                         </div>
                       </form>
+
                     </div>
                 </div>
             </div>

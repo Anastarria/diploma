@@ -70,6 +70,10 @@ class BookController
         $cover = $request->file('cover')->getClientOriginalName();
         $path = $request->file('path_to_book')->getClientOriginalName();
 
+        if (strlen($validated['description']) < 50){
+            die();
+        }
+
         $book = new Book();
 
         Storage::putFileAs(
@@ -87,10 +91,10 @@ class BookController
         $book->cover = md5(time()) . '.' . $cover;
         $book->path_to_book = md5(time()) . '.' . $path;
 
-
         $book->save();
 
-        return redirect('/');
+        return response()->json(Response::HTTP_CREATED);
+
     }
 
     public function updateBookPage($id): View

@@ -14,6 +14,7 @@
             <input class="form-control" type="email" id="email" placeholder="example@domain.com">
             <input class="form-control" type="password" id="password" placeholder="Your password here">
             <button type="submit" class="btn btn-success" onclick="login()">Sign in</button>
+            <a href="/password_reset" type="submit" class="btn btn-success">Забыли пароль?</a>
         </div>
     </div>
     @push('scripts')

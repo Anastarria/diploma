@@ -60,7 +60,10 @@ Route::post('login', 'App\Http\Controllers\AuthController@login');
 Route::post('register', 'App\Http\Controllers\AuthController@register');
 Route::get('logout', 'App\Http\Controllers\AuthController@logout');
 
-
+Route::get('reset_confirmation', 'App\Http\Controllers\AuthController@resetConfirmationPage');
+Route::post('reset_confirmation', 'App\Http\Controllers\AuthController@resetConfirmation');
+Route::post('password_reset', 'App\Http\Controllers\AuthController@resetPass');
+Route::get('password_reset', 'App\Http\Controllers\AuthController@resetPassPage');
 
 
 Route::get('invite', function (\Illuminate\Http\Request $request) {

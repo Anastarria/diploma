@@ -4,8 +4,11 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Requests\EditProfileRequest;
 use App\Http\Requests\LoginUserRequest;
 use App\Http\Requests\RegisterUserRequest;
+use App\Mail\PasswordResetLink;
+use App\Models\PasswordReset;
 use App\Models\User;
 use App\Models\UserVerification;
 use Illuminate\Http\Response;
@@ -102,6 +105,67 @@ class AuthController
         if ($user = $request->user()) {
             Auth::logout();
         }
+
+        return redirect('/');
+    }
+
+    public function resetPass(EditProfileRequest $request)
+    {
+        $validated = $request->validated();
+
+        $user = User::query()
+            ->where('email', $validated['email'])
+            ->first();
+
+        if (!$user) {
+            return response()
+                ->json(['error' => "Юзер с указанным адресом не найден. Перепроверьте введенные данные."], Response::HTTP_UNAUTHORIZED);
+        }
+
+        $reset = new PasswordReset();
+        $reset->user_id = $user->id;
+        $reset->hash = md5(time() . $user->id);
+        $reset->save();
+
+        Mail::to($user)->send(new PasswordResetLink($reset->hash));
+
+        return response()->json(['status' => true], Response::HTTP_OK);
+    }
+
+    public function resetPassPage():View
+    {
+        return view('Auth.password_reset');
+    }
+
+    public function resetConfirmationPage(Request $request)
+    {
+        $hash = $request->input('hash');
+
+        $reset = PasswordReset::query()
+            ->where('hash', $hash)
+            ->firstOrFail();
+
+        $user = User::query()->where('id', $reset->user_id)->first();
+
+        $reset->delete();
+
+        return view('Auth.newPassword', [
+            'user_email' => $user->email
+        ]);
+    }
+
+    public function resetConfirmation(EditProfileRequest $request)
+    {
+        $validated = $request->validated();
+
+        $user = User::query()
+            ->where('email', '=', $validated['email'])
+            ->first();
+
+        $user->password = Hash::make($validated['password']);
+        $user->save();
+
+        Auth::login($user);
 
         return redirect('/');
     }

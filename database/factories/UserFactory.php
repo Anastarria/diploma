@@ -24,10 +24,10 @@ class UserFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
-            'nickname' => $this->faker->name,
+            'nickname' => $this->faker->userName,
             'email' => $this->faker->unique()->safeEmail,
-            'email_verified' => 0,
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'email_verified' => 1,
+            'password' => md5(time()) // password
         ];
     }
 }
