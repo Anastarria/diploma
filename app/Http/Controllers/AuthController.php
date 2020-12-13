@@ -82,6 +82,14 @@ class AuthController
                 ->json(['error' => "User has been already registered, Please <a href='/login'>Login</a>"], Response::HTTP_UNAUTHORIZED);
         }
 
+        if (strlen($validated['password']) < 8){
+            return response()
+                ->json(['error' => "В пароле должно быть не менее 8 символов"], Response::HTTP_UNAUTHORIZED);
+        } else if (!preg_match("/[ `!@#$%^&*()_+\-=\[\]{};':\"\\|,.<>\/?~]/", $validated['password'])){
+            return response()
+                ->json(['error' => "Пароль не соответствует требованиям! Убедитесь что ваш пароль содержит: буквы верхнего и нижнего регистра, цифры, специальные символы"], Response::HTTP_UNAUTHORIZED);
+        }
+
 
         $user = new User();
         $user->email = $validated['email'];

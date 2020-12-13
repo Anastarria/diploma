@@ -2,17 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2d22dc29-c233-4187-9652-f76043a99967" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/Book/createbook_step2.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserAvatarController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserAvatarController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/CreateBookRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/CreateBookRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/filesystems.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/filesystems.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/createbook.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/createbook.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Book/createbook.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Book/createbook.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/Book/editbook.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Book/editbook.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Feature/UserTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/UserTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -264,7 +256,7 @@
       <workItem from="1607705937405" duration="1218000" />
       <workItem from="1607774723687" duration="20351000" />
       <workItem from="1607801201450" duration="4354000" />
-      <workItem from="1607857453258" duration="5702000" />
+      <workItem from="1607857453258" duration="8445000" />
     </task>
     <servers />
   </component>
