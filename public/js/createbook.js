@@ -5,16 +5,13 @@ function createBook()
     let author = window.document.getElementById('author').value;
     let genre = window.document.getElementById('genre').value;
     let description = window.document.getElementById('description').value;
-    let path_to_book = window.document.getElementById('path_to_book').files[0].name;
-    let cover = window.document.getElementById('cover').files[0].name;
 
     let http = new XMLHttpRequest();
     let url = '/books/create';
-    let params = JSON.stringify({title: title, author: author, genre: genre, description: description, path_to_book: path_to_book, cover: cover});
+    let params = JSON.stringify({title: title, author: author, genre: genre, description: description});
     http.open('POST', url, true);
 
     http.setRequestHeader('Content-type', 'application/json');
-    http.setRequestHeader('Content-type', 'image/jpeg,image/png,text/plain,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword');
     http.setRequestHeader('Accept', 'application/json');
 
     if (author.length < 6){
@@ -51,16 +48,10 @@ function createBook()
     }
 
     http.onreadystatechange = function() {
-        if(http.readyState === 4 && http.status === 201) {
+        if(http.readyState === 4 && http.status === 200) {
             document.getElementById('loader').style.display = 'none';
-            const successNotification = window.createNotification({
-                theme: 'success',
-                showDuration: 10000
-            });
-            successNotification({
-                message: 'Книга добавлена'
-            });
-            window.location.href = '/';
+
+            window.location.href = '/books/create/'+title;
         } else if (http.readyState === 4 && http.status > 399) {
             const errorNotification = window.createNotification({
                 theme: 'error',

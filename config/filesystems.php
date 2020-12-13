@@ -82,5 +82,11 @@ return [
         public_path('storage') => storage_path('app/public'),
     ],
 
+    'testing' => [
+        'driver' => 'local',
+        'root' => storage_path('app/public/avatars'),
+        'visibility' => 'public',
+        ]
+
 
 ];

@@ -62,38 +62,31 @@ class BookController
         return view('Book.createbook');
     }
 
+    public function createBookPage2($title): View
+    {
+        return view('Book.createbook_step2', [
+            'title' => $title
+        ]);
+    }
+
     public function createBook(CreateBookRequest $request)
     {
         $validated = $request->validated();
         $user = $request->user();
 
-        $cover = $request->file('cover')->getClientOriginalName();
-        $path = $request->file('path_to_book')->getClientOriginalName();
-
-        if (strlen($validated['description']) < 50){
-            die();
-        }
-
         $book = new Book();
-
-        Storage::putFileAs(
-            'public/books', $request->file('path_to_book'), md5(time()) . '.' . $path
-        );
-        Storage::putFileAs(
-            'public/book_covers', $request->file('cover'), md5(time()) . '.' . $cover
-        );
 
         $book->title = $validated['title'];
         $book->author = $validated['author'];
         $book->genre = $validated['genre'];
         $book->description = $validated['description'];
         $book->added_by = $user->name;
-        $book->cover = md5(time()) . '.' . $cover;
-        $book->path_to_book = md5(time()) . '.' . $path;
 
         $book->save();
 
-        return response()->json(Response::HTTP_CREATED);
+//        return view('Book.createbook_step2', [
+//            'book_title' => $book->title
+//        ]);
 
     }
 
@@ -153,6 +146,20 @@ class BookController
         $book->save();
 
         return redirect('/books/edit/'.$id);
+    }
+
+    public function uploadBookFiles($title, EditBookRequest $request)
+    {
+        $validated = $request->validated();
+        $book = Book::query()
+            ->where('title', '=', $title)
+            ->first();
+
+        $this->changeCover($book->id, $request);
+        $this->changeBookFile($book->id, $request);
+
+
+        return redirect('/');
     }
 
     public function changeBookFile($id, EditBookRequest $request)

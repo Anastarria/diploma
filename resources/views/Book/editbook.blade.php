@@ -60,7 +60,7 @@
                         <hr>
                         <div class="row">
                             <div class="col-sm-3">
-                                <h6 class="mb-0">Genre</h6>
+                                <h6 class="mb-0">Жанр</h6>
                             </div>
                             <div id="changeGenre" style="display: none" class="col-sm-9 text-secondary">
 
@@ -81,14 +81,14 @@
                             <hr>
                         <div class="row">
                             <div class="col-sm-3">
-                                <h6 class="mb-0">Description</h6>
+                                <h6 class="mb-0">Описание</h6>
                             </div>
                             <div id="changeDescription" style="display: none" class="col-sm-9 text-secondary">
                                 <textarea id="description" rows="6" class="form-control">{{$book[0]->description}}</textarea><br>
                                 <a  onclick="editBookDescription()"><i class="fas fa-check"></i>   Сохранить изменения</a>
                                 <a onclick="hideEditDescription()"><i class="fas fa-times"></i>Отменить</a>
                             </div>
-                            <div id="showDescription" style="display: block">{{$book[0]->description}}<a onclick="showEditDescription()"><i class="fas fa-pencil-alt"></i>Редактировать</a>
+                            <div id="showDescription" class="col-sm-9 text-secondary" style="display: block">{{$book[0]->description}}<a onclick="showEditDescription()"><i class="fas fa-pencil-alt"></i>Редактировать</a>
                             </div>
                         </div>
 

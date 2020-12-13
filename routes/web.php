@@ -33,6 +33,8 @@ Route::get('books/read', 'App\Http\Controllers\BookController@readBook');
 Route::middleware(\App\Http\Middleware\isAdmin::class)->group(function (){
     Route::get('books/create', 'App\Http\Controllers\BookController@createBookPage');
     Route::post('books/create', 'App\Http\Controllers\BookController@createBook');
+    Route::get('books/create/{title}', 'App\Http\Controllers\BookController@createBookPage2');
+    Route::post('books/create/{title}', 'App\Http\Controllers\BookController@uploadBookFiles');
     Route::get('books/edit/{id}', 'App\Http\Controllers\BookController@updateBookPage');
     Route::post('books/edit/{id}', 'App\Http\Controllers\BookController@updateBook');
     Route::post('books/delete/{id}', 'App\Http\Controllers\BookController@deleteBook');

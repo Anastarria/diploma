@@ -31,7 +31,7 @@ class UserTest extends TestCase
             $this->assertNotSame($user, $used);
         }
 
-        $response->assertStatus(Response::HTTP_CREATED);
+        $response->assertStatus(Response::HTTP_OK) ;
 
     }
 
@@ -64,30 +64,57 @@ class UserTest extends TestCase
             'password' => bcrypt('i-love-laravel'),
         ]);
 
+//invalid password
         $response = $this->from('/login')->post('/login', [
             'email' => $user->email,
             'password' => 'invalid-password',
         ]);
 
         $response->assertStatus(Response::HTTP_UNAUTHORIZED);
+
+//incorrect email
+        $response = $this->from('/login')->post('/login', [
+            'email' => substr(md5(time()), 0, 6) . '@example.com',
+            'password' => 'i-love-laravel',
+        ]);
+
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED);
+
+//email format check
+        $response = $this->postJson('/login', [
+            'email' => '1',
+            'password' => 'i-love-laravel',
+        ]);
+
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+
+//password should be more than 8 symbols
+        $response = $this->postJson('/login', [
+            'email' => $user->email,
+            'password' => substr(md5(time()), 0, 6)
+        ]);
+
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED);
+
         $this->assertGuest();
     }
 
-//    public function test_avatars_can_be_uploaded()
-//    {
-//        User::factory()->make();
-//
-//        $file = UploadedFile::fake()->image('avatar.jpg');
-//
-//        Storage::fake('public/avatars');
-//
-//        $this->actingAs($this->user)->post('/editavatar', [
-//            'path_to_avatar' => $file,
-//        ]);
-//
-//
-//        Storage::fake('public/avatars')->assertExists($file->hashName());
-//        Storage::fake('public/avatars')->assertMissing('missing.jpg');
-//    }
+    public function testEditAvatar()
+    {
+        $user = User::factory()->make();
+
+        Storage::fake('/');
+
+        $response = $this->actingAs($user)->postJson('/editavatar', [
+            'path_to_avatar' => UploadedFile::fake()->image('avatar.jpg'),
+        ]);
+
+        $user->path_to_avatar = 'avatar.jpg';
+        $user->save();
+
+        $response->assertRedirect('/profile/edit');
+        Storage::fake('/')->assertExists('avatar.jpg');
+
+    }
 
 }

@@ -37,6 +37,8 @@ class UserAvatarController extends Controller
     public function delete(Request $request)
     {
         $user = $request->user();
+        Storage::delete(
+            'public/avatars/'.$user->path_to_avatar);
         $user->path_to_avatar = null;
         $user->save();
 
