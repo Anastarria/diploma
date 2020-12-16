@@ -44,11 +44,6 @@ class ProfileController extends Controller
     {
         $user = $request->user();
 
-        if (!$user) {
-            header("Location: /");
-            die();
-        }
-
         return view('User.editProfilePage', [
             'user' => $user
         ]);
@@ -61,6 +56,16 @@ class ProfileController extends Controller
         $user = User::query()
             ->where('id', '=', $userId)
             ->first();
+
+        if (!$request->user()){
+            return response()
+                ->json("Not allowed");
+        }
+
+        if (!$user){
+            return response()
+                ->json("No such user here");
+        }
 
         $validated = $request->validated();
 

@@ -44,7 +44,7 @@ class AuthController extends Controller
             'password' => $validated['password']
         ]);
 
-        if ($user || !Hash::check($validated['password'], $user->password)) {
+        if (!$user || !Hash::check($validated['password'], $user->password)) {
             return response()
                 ->json(['error' => "User not found or password is incorrect"], Response::HTTP_UNAUTHORIZED);
         }

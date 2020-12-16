@@ -41,7 +41,9 @@ class CommentController extends Controller
             ->where('id', '=', $id)
             ->first();
 
-        if (!$request->user() || !$request->user()->nickname === $comment->added_by){
+        $user = $request->user();
+
+        if (!$user || !$user->nickname === $comment->added_by){
             return response()
                 ->json("You can delete only your own comments", Response::HTTP_UNAUTHORIZED);
         }
