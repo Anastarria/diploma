@@ -48,13 +48,15 @@ Route::middleware(\App\Http\Middleware\LoggedIn::class)->group(function (){
     Route::get('profile/info', 'App\Http\Controllers\ProfileController@showProfile');
     Route::get('profile/edit', 'App\Http\Controllers\ProfileController@editProfilePage');
     Route::post('profile/edit', 'App\Http\Controllers\ProfileController@updateProfile');
+
+    Route::post('books/bookmark/add', 'App\Http\Controllers\BookMarksController@addBookmark');
+    Route::post('books/bookmark/remove', 'App\Http\Controllers\BookMarksController@removeBookmark');
+
+    Route::post('books/comment/create', 'App\Http\Controllers\CommentController@createComment');
+    Route::post('books/comment/delete/{id}', 'App\Http\Controllers\CommentController@deleteComment');
 });
 
-Route::post('books/bookmark/add', 'App\Http\Controllers\BookMarksController@addBookmark');
-Route::post('books/bookmark/remove', 'App\Http\Controllers\BookMarksController@removeBookmark');
 
-Route::post('books/comment/create', 'App\Http\Controllers\CommentController@createComment');
-Route::post('books/comment/delete/{id}', 'App\Http\Controllers\CommentController@deleteComment');
 
 Route::get('login', 'App\Http\Controllers\AuthController@showLoginForm');
 Route::get('register', 'App\Http\Controllers\AuthController@showRegistrationForm');
