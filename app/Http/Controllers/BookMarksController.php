@@ -11,7 +11,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class BookMarksController
+class BookMarksController extends Controller
 {
     public function addBookmark(CreateBookmarkRequest $request)
     {

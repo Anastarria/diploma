@@ -17,7 +17,7 @@ use Illuminate\Notifications\Notifiable;
  * @property int $id
  * @property string $added_by
  * @property string $text
- * @property string $book
+ * @property string $book_id
 
  *
 
@@ -30,6 +30,11 @@ class Comment extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function book(): HasOne
+    {
+        return $this->hasOne(Book::class, 'id', 'book_id');
     }
 
 

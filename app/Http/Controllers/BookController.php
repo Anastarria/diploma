@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Response;
 
-class BookController
+class BookController extends Controller
 {
 
     public function index()
@@ -35,25 +35,30 @@ class BookController
 
 
         $book = Book::query()
+            ->with(['bookmark'])
+            ->with(['comment'])
             ->where('id', '=', $id)
-            ->get();
-
-        $comments = Comment::query()
-            ->where('book', '=', $id)
-            ->get()
+            ->first()
             ->toArray();
-
-        $bookmarks = Bookmark::with(['book'])
-            ->with(['user'])
-            ->where('book_id', '=', $id)
-            ->get()
-            ->toArray();
+//
+//        print_r($book);
+//        die();
+//        $comments = Comment::query()
+//            ->where('book', '=', $id)
+//            ->get()
+//            ->toArray();
+//
+//        $bookmarks = Bookmark::with(['book'])
+//            ->with(['user'])
+//            ->where('book_id', '=', $id)
+//            ->get()
+//            ->toArray();
 
         return view('Book.singlebook', [
             'book' => $book,
-            'comments' => $comments,
+//            'comments' => $comments,
             'auth' => $auth,
-            'bookmarks' => $bookmarks
+//            'bookmarks' => $bookmarks
         ]);
     }
 

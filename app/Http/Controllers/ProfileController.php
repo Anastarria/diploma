@@ -11,7 +11,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class ProfileController
+class ProfileController extends Controller
 {
 
     public function showProfile(Request $request): View
@@ -22,11 +22,6 @@ class ProfileController
            header("Location: /");
            die();
        }
-
-       $bookmarks = Bookmark::query()
-           ->where('user_id', '=', $user->id)
-           ->get('book_id')
-           ->toArray();
 
 
        $books = Bookmark::with(['book'])

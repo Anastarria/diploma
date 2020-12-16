@@ -7,10 +7,11 @@ use App\Http\Requests\CreateCommentRequest;
 use App\Models\Book;
 use App\Models\Comment;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 
-class CommentController
+class CommentController extends Controller
 {
 
 
@@ -19,18 +20,29 @@ class CommentController
         $validated = $request->validated();
         $user = $request->user();
 
+        if (!$user){
+            return response()
+                ->json("You have to be logged in to be able to leave comments", Response::HTTP_UNAUTHORIZED);
+        }
+
         $comment = new Comment();
         $comment->added_by = $user->nickname;
         $comment->text = $validated['comment'];
-        $comment->book = $validated['book'];
+        $comment->book_id = $validated['book'];
 
         $comment->save();
 
         return redirect('/books/info/'.$validated['book']);
     }
 
-    public function deleteComment($id)
+    public function deleteComment($id, Request $request)
     {
+
+        if (!$request->user()){
+            return response()
+                ->json("You have to be logged in to be able to leave comments", Response::HTTP_UNAUTHORIZED);
+        }
+
         $comment = Comment::query()
             ->where('id', '=', $id)
             ->first();

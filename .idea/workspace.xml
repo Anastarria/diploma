@@ -2,9 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2d22dc29-c233-4187-9652-f76043a99967" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookMarksController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookMarksController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CommentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProfileController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProfileController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Comment.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Comment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_23_094017_create_comments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_23_094017_create_comments_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/Book/singlebook.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/Book/singlebook.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -256,7 +262,10 @@
       <workItem from="1607705937405" duration="1218000" />
       <workItem from="1607774723687" duration="20351000" />
       <workItem from="1607801201450" duration="4354000" />
-      <workItem from="1607857453258" duration="8445000" />
+      <workItem from="1607857453258" duration="9267000" />
+      <workItem from="1607935153178" duration="599000" />
+      <workItem from="1608113462886" duration="11000" />
+      <workItem from="1608128259787" duration="9515000" />
     </task>
     <servers />
   </component>

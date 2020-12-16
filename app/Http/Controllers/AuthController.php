@@ -20,7 +20,7 @@ use App\Mail\InvitationLinkEmail;
 use Illuminate\Http\Request;
 
 
-class AuthController
+class AuthController extends Controller
 {
     public function showLoginForm(): View
     {
@@ -30,13 +30,13 @@ class AuthController
     public function login(LoginUserRequest $request)
     {
         $validated = $request->validated();
-        $unauthorized = User::query()
+        $user = User::query()
             ->where('email', $validated['email'])
-            ->where('email_verified', 0)
             ->first();
 
-        if ($unauthorized) {
-            die("Check your email account for the validation link!");
+        if ($user->email_verified === 0) {
+            return response()
+                ->json("Check your email account for the validation link!");
         }
 
         $auth = Auth::attempt([
@@ -44,12 +44,7 @@ class AuthController
             'password' => $validated['password']
         ]);
 
-        $user = User::query()
-            ->where('email', $validated['email'])
-            -> where('email_verified', 1)
-            ->first();
-
-        if (!$user || !Hash::check($validated['password'], $user->password)) {
+        if ($user || !Hash::check($validated['password'], $user->password)) {
             return response()
                 ->json(['error' => "User not found or password is incorrect"], Response::HTTP_UNAUTHORIZED);
         }
@@ -61,7 +56,8 @@ class AuthController
             ]);
             return redirect('/');
         }
-        die("Authorization failed");
+        return response()
+            ->json("Authorization failed");
     }
 
     public function showRegistrationForm(): View
