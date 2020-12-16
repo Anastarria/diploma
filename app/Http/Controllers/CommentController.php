@@ -37,15 +37,14 @@ class CommentController extends Controller
 
     public function deleteComment($id, Request $request)
     {
-
-        if (!$request->user()){
-            return response()
-                ->json("You have to be logged in to be able to leave comments", Response::HTTP_UNAUTHORIZED);
-        }
-
         $comment = Comment::query()
             ->where('id', '=', $id)
             ->first();
+
+        if (!$request->user() || !$request->user()->nickname === $comment->added_by){
+            return response()
+                ->json("You can delete only your own comments", Response::HTTP_UNAUTHORIZED);
+        }
 
         if (!$comment) {
             return response()->json(['error' => 'No such comment'], Response::HTTP_NOT_FOUND);
